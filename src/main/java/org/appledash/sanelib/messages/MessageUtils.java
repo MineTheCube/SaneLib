@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,8 @@ import java.util.regex.Pattern;
  * Blackjack is still best pony.
  */
 public class MessageUtils {
+    private static final Locale locale = Locale.ROOT;
+
     private final SanePlugin plugin;
     private final String chatPrefix;
 
@@ -38,7 +41,7 @@ public class MessageUtils {
         String formatted;
 
         if (fmt.contains("%s")) { // Legacy support.
-            formatted = String.format(fmt, (Object[]) args);
+            formatted = String.format(locale, fmt, (Object[]) args);
         } else {
             formatted = indexedFormat(fmt, (Object[]) args);
         }
@@ -66,7 +69,7 @@ public class MessageUtils {
             String stringRep;
 
             if (!Strings.isNullOrEmpty(m.group(2))) {
-                stringRep = String.format(String.format("%%%s", m.group(2).substring(1)), arguments[index]);
+                stringRep = String.format(locale, String.format("%%%s", m.group(2).substring(1)), arguments[index]);
             } else {
                 stringRep = String.valueOf(arguments[index]);
             }
