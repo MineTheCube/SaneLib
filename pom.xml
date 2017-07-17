@@ -6,55 +6,82 @@
 
     <groupId>org.appledash</groupId>
     <artifactId>sanelib</artifactId>
-    <version>0.3.5-SNAPSHOT</version>
+    <version>0.3.5</version>
+
+    <properties>
+        <!-- Project Properties -->
+        <projectEncoding>UTF-8</projectEncoding>
+        <project.build.sourceEncoding>${projectEncoding}</project.build.sourceEncoding>
+        <project.build.outputEncoding>${projectEncoding}</project.build.outputEncoding>
+
+        <!-- JDK Version -->
+        <jdkVersion>1.8</jdkVersion>
+
+        <!-- Export -->
+        <module.export>out/</module.export>
+
+        <!-- Dependencies versions -->
+        <version.SpigotAPI>1.12-R0.1-SNAPSHOT</version.SpigotAPI>
+        <version.BukkitAPI>${version.SpigotAPI}</version.BukkitAPI>
+        <version.HikariCP>2.4.7</version.HikariCP>
+        <version.PostgreSQL>9.4.1209.jre7</version.PostgreSQL>
+        <version.MySQL>6.0.6</version.MySQL>
+    </properties>
 
     <dependencies>
-        <!--Spigot API-->
+        <!-- Spigot API -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <version>${version.SpigotAPI}</version>
             <scope>provided</scope>
         </dependency>
-        <!--Bukkit API-->
+        <!-- Bukkit API -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <version>${version.BukkitAPI}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- HikariCP -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>2.4.7</version>
+            <version>${version.HikariCP}</version>
         </dependency>
+        <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1209.jre7</version>
+            <version>${version.PostgreSQL}</version>
         </dependency>
+        <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>${version.MySQL}</version>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
+        <defaultGoal>clean install</defaultGoal>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${jdkVersion}</source>
+                    <target>${jdkVersion}</target>
+                    <encoding>${projectEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -62,7 +89,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
                 <configuration>
-                    <outputDirectory>out/</outputDirectory>
+                    <outputDirectory>${module.export}</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
